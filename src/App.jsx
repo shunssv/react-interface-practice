@@ -2,10 +2,35 @@ import './App.css';
 import { GrNotes } from 'react-icons/gr';
 import Search from './components/Search';
 import AddAppointment from './components/AddAppointment';
-import appointmentList from './data.json';
 import AppointmentInfo from './components/AppointmentInfo';
+import { useState, useEffect, useCallback } from 'react';
 
 function App() {
+  let [appointmentList, setAppointmentList] = useState([]);
+  let [query, setQuery] = useState('');
+
+  const filteredAppointments = appointmentList
+    .filter((item) => {
+      return (
+        item.petName.toLowerCase().includes(query.toLowerCase()) ||
+        item.ownerName.toLowerCase().includes(query.toLowerCase()) ||
+        item.aptNotes.toLowerCase().includes(query.toLowerCase())
+      );
+    })
+
+  const fetchData = useCallback(() => {
+    fetch('./data.json')
+      .then((response) => response.json())
+      .then((data) => {
+        setAppointmentList(data);
+      });
+  }, []);
+
+  //keep track of Data
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   return (
     <div className="App container mx-auto mt-3 font-thin">
       <h1 className="text-5xl mb-3">
@@ -14,11 +39,21 @@ function App() {
       </h1>
       <p className="mb-3">this is a page for my react practice!</p>
       <AddAppointment />
-      <Search />
+      <Search query={query} onQueryChange={(myQuery) => setQuery(myQuery)} />
 
       <ul className="divide-y divide-gray-200">
-        {appointmentList.map((appointment) => (
-          <AppointmentInfo key={appointment.id} appointment={appointment} />
+        {filteredAppointments.map((appointment) => (
+          <AppointmentInfo
+            key={appointment.id}
+            appointment={appointment}
+            onDeleteAppointment={(appointmentId) =>
+              setAppointmentList(
+                appointmentList.filter(
+                  (appointment) => appointment.id !== appointmentId
+                )
+              )
+            }
+          />
         ))}
       </ul>
     </div>
