@@ -1,16 +1,42 @@
-import { useState } from 'react'
 import './App.css'
 import { GrNotes } from "react-icons/gr";
+import { BiTrash } from "react-icons/bi";
+import Search from './components/Search';
+import AddAppointment from './components/AddAppointment';
+import appointmentList from './data.json'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <h1 className='text-3xl font-bold underline'><GrNotes />My Projects</h1>
-      <p className="read-the-docs">
+    <div className="App container mx-auto mt-3 font-thin">
+      <h1 className='text-5xl mb-3'>
+        <GrNotes className='inline-block text-red-400 align-top' />
+        My Projects
+      </h1>
+      <p className="mb-3">
         this is a page for my react practice!
       </p>
+      <AddAppointment />
+      <Search />
+
+      <ul className='divide-y divide-gray-200'>
+        {appointmentList
+          .map(appointment => (
+            <li className="px-3 py-3 flex items-start">
+              <button type="button"
+                className="p-1.5 mr-1.5 mt-1 rounded text-white bg-red-500 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <BiTrash /></button>
+              <div className="flex-grow">
+                <div className="flex items-center">
+                  <span className="flex-none font-medium text-2xl text-blue-500">{appointment.petName}</span>
+                  <span className="flex-grow text-right">{appointment.aptDate}</span>
+                </div>
+                <div><b className="font-bold text-blue-500">Owner:</b> {appointment.ownerName}</div>
+                <div className="leading-tight">{appointment.aptNotes}</div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   )
 }
