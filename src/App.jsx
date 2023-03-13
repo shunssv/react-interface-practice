@@ -47,7 +47,13 @@ function App() {
       </h1>
       <p className="mb-3">this is a page for my react practice!</p>
       <AddAppointment />
-      <Search query={query} onQueryChange={(myQuery) => setQuery(myQuery)} />
+      <Search
+        query={query}
+        onQueryChange={(myQuery) => setQuery(myQuery)}
+        onSortByChange={(mySort) => setSortBy(mySort)}
+        sortBy={sortBy}
+        onOrderByChange={(myOrder) => setOrderBy(myOrder)}
+      />
 
       <ul className="divide-y divide-gray-200">
         {filteredAppointments.map((appointment) => (
