@@ -78,6 +78,14 @@ function App() {
           />
         ))}
       </ul>
+
+      <section className="my-9">
+        <h1 className="text-4xl">heading</h1>
+        <p className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse sapiente sed reprehenderit, dolores amet voluptate necessitatibus magni error assumenda commodi, consectetur ducimus nemo! Beatae earum suscipit odit provident explicabo quo.
+        Ea enim laboriosam optio, odit quibusdam corporis perferendis ratione non vel harum omnis, architecto libero numquam aspernatur ex alias atque id sunt ipsum quaerat odio, aliquam quisquam a sequi? Pariatur!
+        Similique, reiciendis repudiandae hic culpa earum quibusdam. Magnam, eligendi doloremque saepe provident praesentium earum quidem excepturi! Voluptatum minima, harum aliquam, ducimus nisi eligendi necessitatibus quos laborum, itaque dicta animi consequatur?
+        Tempora inventore labore officiis provident omnis est quo voluptatem explicabo voluptas molestiae soluta cupiditate modi ipsum neque obcaecati veniam accusamus at necessitatibus quae fugit asperiores, repellat autem sunt. Unde, quae.</p>
+      </section>
     </div>
   );
 }
